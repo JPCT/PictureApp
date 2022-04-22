@@ -1,5 +1,6 @@
 package com.mobile.picture;
 
+import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.FileProvider;
@@ -11,7 +12,6 @@ import android.os.Bundle;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
-import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.util.Log;
@@ -26,6 +26,8 @@ public class MainActivity extends AppCompatActivity {
     private ImageView imageViewPhoto;
     private Button btnTakePhoto;
     private Button btnSelectPhoto;
+    private ActivityResultLauncher<Intent> actResLauncherTakePhoto;
+    private ActivityResultLauncher<Intent> actResLauncherSelectPhoto;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,27 +58,27 @@ public class MainActivity extends AppCompatActivity {
         image.delete();
         Uri fileUri = FileProvider.getUriForFile(this, "com.mobile.picture", image);
         actResLauncherTakePhoto = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), result -> {
-               switch (result.getResultCode()){
-                   case RESULT_OK:
-                       //for (int k = 1; k <= 6; k++) {
-                           try {
-                               final Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), fileUri);
-                               if(bitmap != null) {
-                                   runOnUiThread(() -> imageViewPhoto.setImageURI(fileUri));
-                                   break;
-                               } else {
-                                   Thread.sleep(500);
-                               }
-                           } catch (Exception e){
-                               //e.printStackTrace();
-                           }
-                       //}
-                       break;
-                   case RESULT_CANCELED:
-                       Log.e("Take Photo", "Result Cancel");
-                       break;
-                   default:
-               }
+            switch (result.getResultCode()) {
+                case RESULT_OK:
+                    //for (int k = 1; k <= 6; k++) {
+                    try {
+                        final Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), fileUri);
+                        if (bitmap != null) {
+                            runOnUiThread(() -> imageViewPhoto.setImageURI(fileUri));
+                            break;
+                        } else {
+                            Thread.sleep(500);
+                        }
+                    } catch (Exception e) {
+                        //e.printStackTrace();
+                    }
+                    //}
+                    break;
+                case RESULT_CANCELED:
+                    Log.e("Take Photo", "Result Cancel");
+                    break;
+                default:
+            }
         });
 
         btnTakePhoto.setOnClickListener(v -> {
