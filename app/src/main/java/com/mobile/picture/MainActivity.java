@@ -11,7 +11,6 @@ import android.content.Context;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Environment;
@@ -50,7 +49,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
         File image = new File(imageFolderPath, "TempPhoto.jpg");
-        fileUri = FileProvider.getUriForFile(this, "com.example.demotakephoto", image);
+        fileUri = FileProvider.getUriForFile(this, "com.mobile.picture", image);
 
         initViews();
         initEvents();
@@ -167,29 +166,12 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    private boolean hasCameraPermissions(Context context) {
-        if (context.checkSelfPermission(Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
-            Log.e("Take Photo", "PERMISSION DENIED");
-            return false;
-        }
-
-        return true;
-    }
-
     private boolean hasCameraHardware(Context context) {
         if (context.getPackageManager().hasSystemFeature(PackageManager.FEATURE_CAMERA_ANY)) {
             // this device has a camera
             return true;
         } else {
             // no camera on this device
-            return false;
-        }
-    }
-
-    private boolean hasCameraHardware(Context context){
-        if (context.getPackageManager().hasSystemFeature(PackageManager.FEATURE_CAMERA_ANY)){
-            return true;
-        }else{
             return false;
         }
     }
