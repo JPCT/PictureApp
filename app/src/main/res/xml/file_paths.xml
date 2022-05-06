@@ -3,7 +3,7 @@
 
     <file-path name="my_docs" path="docs/" />
 
-    <external-file-path name="external_files_dir" path="/" />
+    <external-files-path name="external_files_dir" path="/" />
 
     <cache-path name="cache_dir" path="/" />
 
