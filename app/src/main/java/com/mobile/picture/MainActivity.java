@@ -60,6 +60,7 @@ public class MainActivity extends AppCompatActivity {
     public void showPhoto(Uri fileUri) {
         try {
             final Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), fileUri);
+            imageViewPhoto.setImageBitmap(null);
             runOnUiThread(() -> imageViewPhoto.setImageURI(fileUri));
         } catch (Exception e) {
             //e.printStackTrace();
