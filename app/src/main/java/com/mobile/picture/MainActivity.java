@@ -1,5 +1,7 @@
 package com.mobile.picture;
 
+import static androidx.core.content.FileProvider.getUriForFile;
+
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
@@ -54,9 +56,14 @@ public class MainActivity extends AppCompatActivity {
         } else {
             Log.d("Take Photo", imagesFolder + " NOT created.");
         }
-        File image = new File(imageFolderPath, "TempPhoto.jpg");
+
+        File image = new File(Context., "my_images");
+        File newFile = new File(image, "default_image.jpg");
+        Uri fileUri = getUriForFile(Context , "com.mobile.picture", newFile);
+
+        //File image = new File(imageFolderPath, "TempPhoto.jpg");
         image.delete();
-        Uri fileUri = FileProvider.getUriForFile(this, "com.mobile.picture", image);
+        //Uri fileUri = getUriForFile(this, "com.mobile.picture", image);
         actResLauncherTakePhoto = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), result -> {
             switch (result.getResultCode()) {
                 case RESULT_OK:

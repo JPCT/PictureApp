@@ -1,5 +1,5 @@
 <paths xmlns:android="http://schemas.android.com/apk/res/android">
-    <file-path name="my_images" path="images/" />
+    <file-path name="my_images" path="/" />
 
     <file-path name="my_docs" path="docs/" />
 
