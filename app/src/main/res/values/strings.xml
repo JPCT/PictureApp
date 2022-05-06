@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">Picture</string>
+    <string name="Error">Error</string>
+    <string name="You_must_enable_permission_camera">Debe tener permiso de camara</string>
+    <string name="OK">Aceptar</string>
+    <string name="There_is_no_app_that_support_this_action">No hay una aplicación que soporte esta acción</string>
+    <string name="Info">Información</string>
+    <string name="Camera_not_detected">Camara no detectada</string>
 </resources>
